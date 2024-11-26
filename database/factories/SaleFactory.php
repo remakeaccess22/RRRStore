@@ -1,0 +1,20 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Sale;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class SaleFactory extends Factory
+{
+    protected $model = Sale::class;
+
+    public function definition()
+    {
+        return [
+            'SaleDate' => $this->faker->date(),
+            'PaymentType' => $this->faker->randomElement(['Cash', 'Credit']),
+            'TotalAmount' => $this->faker->randomFloat(2, 100, 1000),
+        ];
+    }
+}
