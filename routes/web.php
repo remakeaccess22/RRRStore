@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+//This Routes is intended for the main application (Inventory Management and Sales)
 
-Route::get('/', function () {
-    return view('welcome');
-});
+require __DIR__ . '/auth.php';
