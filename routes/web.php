@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ApplicantsController;
+use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 
-//This Routes is intended for the main application (Inventory Management and Sales)
+//Nav Links Routes
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -33,5 +35,9 @@ Route::get('archived/employees', function () {
 Route::get('archived/products', function () {
     return view('archived.products');
 })->name('archived.products');
+
+//Routes for Applicants and Employees
+Route::get('/applicants', [ApplicantsController::class, 'index'])->name('personnel.applicants');
+Route::get('/employees', [EmployeesController::class, 'index'])->name('personnel.employees');
 
 require __DIR__ . '/auth.php';
