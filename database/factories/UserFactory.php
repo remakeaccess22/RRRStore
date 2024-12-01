@@ -3,39 +3,24 @@
 namespace Database\Factories;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password = null;
+    protected $model = User::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected static ?string $password = null; // Cached password for consistent hashing
+
+    public function definition()
     {
         return [
-            'Email' => $this->faker->unique()->email(),
-            'Name' => $this->faker->name(),
-            'Password' => static::$password ??= Hash::make('password'),
-            'RoleID' => Role::factory(),
+            'FirstName' => $this->faker->firstName, // Random first name
+            'LastName' => $this->faker->lastName, // Random last name
+            'Email' => $this->faker->unique()->safeEmail, // Unique email address
+            'Password' => static::$password ??= Hash::make('password'), // Secure hashed password
+            'RoleID' => Role::factory(), // Links user to a role
         ];
     }
-
-    /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * This is not applicable for your structure since `email_verified_at` is not a field in the User model.
-     * However, if needed, you can define additional states as required.
-     */
 }

@@ -12,8 +12,8 @@ class SupplierFactory extends Factory
     public function definition()
     {
         return [
-            'SupplierName' => $this->faker->company,
-            'ContactInfo' => $this->faker->phoneNumber,
+            'SupplierName' => $this->faker->company, // Realistic supplier name
+            'ContactInfo' => $this->faker->phoneNumber, // Random phone number
         ];
     }
 }

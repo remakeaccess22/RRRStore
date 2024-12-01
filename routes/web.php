@@ -26,4 +26,12 @@ Route::prefix('personnel')->group(function () {
     })->name('personnel.employees');
 });
 
+Route::get('archived/employees', function () {
+    return view('archived.employees');
+})->name('archived.employees');
+
+Route::get('archived/products', function () {
+    return view('archived.products');
+})->name('archived.products');
+
 require __DIR__ . '/auth.php';

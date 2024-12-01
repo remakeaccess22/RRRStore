@@ -16,8 +16,15 @@ class Category extends Model
         'CategoryName',
     ];
 
+    // Relationships
     public function products()
     {
         return $this->hasMany(Product::class, 'CategoryID', 'CategoryID');
+    }
+
+    // New relationship for sales details through products
+    public function salesDetails()
+    {
+        return $this->hasManyThrough(SalesDetail::class, Product::class, 'CategoryID', 'ProductID', 'CategoryID', 'ProductID');
     }
 }

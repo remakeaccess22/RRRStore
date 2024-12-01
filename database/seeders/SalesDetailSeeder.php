@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sale;
 use App\Models\SalesDetail;
 use Illuminate\Database\Seeder;
 
@@ -9,6 +10,12 @@ class SalesDetailSeeder extends Seeder
 {
     public function run()
     {
-        SalesDetail::factory(30)->create();
+        $sales = Sale::all();
+
+        foreach ($sales as $sale) {
+            SalesDetail::factory()
+                ->count(5)
+                ->create(['SaleID' => $sale->SaleID]);
+        }
     }
 }

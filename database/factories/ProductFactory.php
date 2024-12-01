@@ -14,13 +14,13 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            'ProductName' => $this->faker->word,
-            'CategoryID' => Category::factory(),
-            'SupplierID' => Supplier::factory(),
-            'QuantityInStock' => $this->faker->numberBetween(0, 100),
-            'RestockThreshold' => $this->faker->numberBetween(1, 10),
-            'UnitPrice' => $this->faker->randomFloat(2, 10, 100),
-            'ExpirationDate' => $this->faker->optional()->date(),
+            'ProductName' => $this->faker->unique()->words(2, true), // Generate a two-word product name
+            'CategoryID' => Category::factory(), // Links a product to a category
+            'SupplierID' => Supplier::factory(), // Links a product to a supplier
+            'QuantityInStock' => $this->faker->numberBetween(0, 100), // Random stock quantity
+            'RestockThreshold' => $this->faker->numberBetween(1, 10), // Low stock threshold
+            'UnitPrice' => $this->faker->randomFloat(2, 10, 100), // Price with two decimal places
+            'ExpirationDate' => $this->faker->optional()->dateTimeBetween('+1 month', '+1 year'), // Optional expiration date
         ];
     }
 }

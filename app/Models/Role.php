@@ -12,10 +12,13 @@ class Role extends Model
     protected $table = 'roles';
     protected $primaryKey = 'RoleID';
 
+    protected $guarded = ['RoleID'];
+
     protected $fillable = [
         'RoleName',
     ];
 
+    // Relationships
     public function users()
     {
         return $this->hasMany(User::class, 'RoleID', 'RoleID');

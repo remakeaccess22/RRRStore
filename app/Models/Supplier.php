@@ -17,6 +17,7 @@ class Supplier extends Model
         'ContactInfo',
     ];
 
+    // Relationships
     public function products()
     {
         return $this->hasMany(Product::class, 'SupplierID', 'SupplierID');

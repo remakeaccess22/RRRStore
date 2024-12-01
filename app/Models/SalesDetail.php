@@ -19,6 +19,12 @@ class SalesDetail extends Model
         'Subtotal',
     ];
 
+    // Casting for specific fields
+    protected $casts = [
+        'Subtotal' => 'float',
+    ];
+
+    // Relationships
     public function sale()
     {
         return $this->belongsTo(Sale::class, 'SaleID', 'SaleID');

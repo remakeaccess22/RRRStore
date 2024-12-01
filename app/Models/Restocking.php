@@ -20,6 +20,13 @@ class Restocking extends Model
         'TotalCost',
     ];
 
+    // Casting for specific fields
+    protected $casts = [
+        'RestockDate' => 'datetime',
+        'TotalCost' => 'float',
+    ];
+
+    // Relationships
     public function product()
     {
         return $this->belongsTo(Product::class, 'ProductID', 'ProductID');

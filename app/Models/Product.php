@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'products';
     protected $primaryKey = 'ProductID';
@@ -22,6 +23,13 @@ class Product extends Model
         'ExpirationDate',
     ];
 
+    // Casting for specific fields
+    protected $casts = [
+        'UnitPrice' => 'float',
+        'ExpirationDate' => 'datetime',
+    ];
+
+    // Relationships
     public function category()
     {
         return $this->belongsTo(Category::class, 'CategoryID', 'CategoryID');
@@ -40,5 +48,11 @@ class Product extends Model
     public function restocking()
     {
         return $this->hasMany(Restocking::class, 'ProductID', 'ProductID');
+    }
+
+    // Query Scopes
+    public function scopeLowStock($query)
+    {
+        return $query->where('QuantityInStock', '<', 'RestockThreshold');
     }
 }

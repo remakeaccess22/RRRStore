@@ -18,6 +18,13 @@ class Sale extends Model
         'TotalAmount',
     ];
 
+    // Casting for specific fields
+    protected $casts = [
+        'SaleDate' => 'datetime',
+        'TotalAmount' => 'float',
+    ];
+
+    // Relationships
     public function salesDetails()
     {
         return $this->hasMany(SalesDetail::class, 'SaleID', 'SaleID');
