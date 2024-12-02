@@ -5,7 +5,7 @@
     <!-- Login Form -->
     <form method="POST" action="{{ route('login') }}">
         @csrf
-
+    
         <!-- Title -->
         <h2 class="text-center text-2xl font-bold text-gray-800 mb-6">Sign in to your account</h2>
 

@@ -92,14 +92,16 @@
                         <ul class="pl-3 pt-2">
                             <div class="mt-2">
                                 <li>
-                                    <x-nav-link href="{{ route('personnel.employees') }}" :active="request()->routeIs('personnel.employees')">
+                                    <x-nav-link href="{{ route('personnel.employees') }}"
+                                        :active="request()->routeIs('personnel.employees')">
                                         Employees
                                     </x-nav-link>
                                 </li>
                             </div>
                             <div class="mt-2">
                                 <li>
-                                    <x-nav-link href="{{ route('personnel.applicants') }}" :active="request()->routeIs('personnel.applicants')">
+                                    <x-nav-link href="{{ route('personnel.applicants') }}"
+                                        :active="request()->routeIs('personnel.applicants')">
                                         Applicants
                                     </x-nav-link>
                                 </li>
@@ -123,13 +125,13 @@
                         </svg>
                         Archived
                         <svg class="hs-accordion-active:hidden ms-auto block w-4 h-4 group-hover:text-white"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m6 9 6 6 6-6" />
                         </svg>
                         <svg class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-white group-hover:text-white"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m18 15-6-6-6 6" />
                         </svg>
                     </button>
@@ -140,14 +142,16 @@
                         <ul class="pl-3 pt-2">
                             <div class="mt-2">
                                 <li>
-                                    <x-nav-link href="{{ route('archived.products') }}" :active="request()->routeIs('archived.products')">
+                                    <x-nav-link href="{{ route('archived.products') }}"
+                                        :active="request()->routeIs('archived.products')">
                                         Archived Products
                                     </x-nav-link>
                                 </li>
                             </div>
                             <div class="mt-2">
                                 <li>
-                                    <x-nav-link href="{{ route('archived.employees') }}" :active="request()->routeIs('archived.employees')">
+                                    <x-nav-link href="{{ route('archived.employees') }}"
+                                        :active="request()->routeIs('archived.employees')">
                                         Archived Employees
                                     </x-nav-link>
                                 </li>
@@ -159,25 +163,18 @@
         </ul>
     </div>
 
-    <!-- Footer Section -->
-    <div class="p-4 border-t border-gray-200">
-        <div class="flex items-center justify-between">
-            {{-- <!-- User Email -->
-            <span class="text-sm text-gray-600">{{ Auth::user()->email }}</span>
-            <!-- Logout Button -->
-            <form method="POST" action="{{ route('logout') }}"> --}}
+    <!-- Footer Section with Logout Form -->
+    <div class="p-4">
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit"
-                class="flex items-center gap-2 text-xs text-gray-900 hover:text-white transition-colors duration-300 hover:bg-red-500 p-2 rounded-md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+            <x-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                <svg class="shrink-0 w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16 17 21 12 16 7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                    <path d="M17 16l4-4-4-4" />
+                    <path d="M21 12H7" />
                 </svg>
                 Logout
-            </button>
-            </form>
-        </div>
+            </x-nav-link>
+        </form>
     </div>
 </div>
