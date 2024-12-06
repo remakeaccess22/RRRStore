@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -36,7 +36,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         // Log the user out
-        auth()->logout();
+        Auth::logout();
 
         // Redirect to the login page
         return redirect()->route('login');
