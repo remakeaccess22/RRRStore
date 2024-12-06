@@ -1,11 +1,17 @@
 <?php
-
 use App\Http\Controllers\ApplicantsController;
+use App\Http\Controllers\ArchivedEmployeesController;
+use App\Http\Controllers\ArchivedProductsController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\LoginController;
 
 //Nav Links Routes
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 Route::get('inventory', function () {
     return view('inventory.index');
 })->name('inventory');
@@ -33,11 +39,23 @@ Route::get('archived/products', function () {
     return view('archived.products');
 })->name('archived.products');
 
-// Routes for Applicants and Employees
+//Routes for Applicants and Employees
 Route::get('/applicants', [ApplicantsController::class, 'index'])->name('personnel.applicants');
 Route::get('/employees', [EmployeesController::class, 'index'])->name('personnel.employees');
 
-// Include auth routes
-require __DIR__ . '/auth.php';
+//Routes for Inventory
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
+Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+//Sample Routing for Sales
+Route::get('/sales', [SalesController::class, 'index'])->name('sales');
+Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');
+
+//Routes for Archived Employees and Products
+Route::get('/archived/employees', [ArchivedEmployeesController::class, 'index'])->name('archived.employees');
+Route::get('/archived/products', [ArchivedProductsController::class, 'index'])->name('archived.products');
+
+// Route::get('/sales/{id}/details', [SalesController::class, 'details'])->name('sales.details');
+// Route::delete('/sales/{id}', [SalesController::class, 'destroy'])->name('sales.destroy');
+
+require __DIR__ . '/auth.php';

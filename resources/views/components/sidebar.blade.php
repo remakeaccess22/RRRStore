@@ -1,5 +1,5 @@
 <div id="sidebar"
-    class="fixed inset-y-0 left-0 transform -translate-x-full bg-white shadow-xl w-64 overflow-y-auto transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col justify-between">
+    class="fixed inset-y-0 left-0 transform -translate-x-full bg-white shadow-xl w-64 overflow-y-auto transition-transform duration-300 lg:translate-x-0 lg:static lg:inset-0 flex flex-col justify-between z-40 max-w-screen-md">
     <!-- Top Section -->
     <div class="p-4 text-gray-900">
         <!-- Logo and Close Button -->
@@ -50,8 +50,7 @@
                     <svg class="shrink-0 w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
-                        <rect x="2" y="5" width="20" height="14" rx="2" ry="2">
-                        </rect>
+                        <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
                         <line x1="12" y1="8" x2="12" y2="16"></line>
                         <path d="M9 12h6"></path>
                     </svg>
@@ -90,22 +89,16 @@
                         class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {{ request()->routeIs('personnel.employees', 'personnel.applicants') ? '' : 'hidden' }}"
                         role="region" aria-labelledby="personnel-accordion">
                         <ul class="pl-3 pt-2">
-                            <div class="mt-2">
-                                <li>
-                                    <x-nav-link href="{{ route('personnel.employees') }}"
-                                        :active="request()->routeIs('personnel.employees')">
-                                        Employees
-                                    </x-nav-link>
-                                </li>
-                            </div>
-                            <div class="mt-2">
-                                <li>
-                                    <x-nav-link href="{{ route('personnel.applicants') }}"
-                                        :active="request()->routeIs('personnel.applicants')">
-                                        Applicants
-                                    </x-nav-link>
-                                </li>
-                            </div>
+                            <li class="mt-2">
+                                <x-nav-link href="{{ route('personnel.employees') }}" :active="request()->routeIs('personnel.employees')">
+                                    Employees
+                                </x-nav-link>
+                            </li>
+                            <li class="mt-2">
+                                <x-nav-link href="{{ route('personnel.applicants') }}" :active="request()->routeIs('personnel.applicants')">
+                                    Applicants
+                                </x-nav-link>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -125,13 +118,13 @@
                         </svg>
                         Archived
                         <svg class="hs-accordion-active:hidden ms-auto block w-4 h-4 group-hover:text-white"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m6 9 6 6 6-6" />
                         </svg>
                         <svg class="hs-accordion-active:block ms-auto hidden w-4 h-4 text-white group-hover:text-white"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="m18 15-6-6-6 6" />
                         </svg>
                     </button>
@@ -140,22 +133,16 @@
                         class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 {{ request()->routeIs('archived.products', 'archived.employees') ? '' : 'hidden' }}"
                         role="region" aria-labelledby="archived-accordion">
                         <ul class="pl-3 pt-2">
-                            <div class="mt-2">
-                                <li>
-                                    <x-nav-link href="{{ route('archived.products') }}"
-                                        :active="request()->routeIs('archived.products')">
-                                        Archived Products
-                                    </x-nav-link>
-                                </li>
-                            </div>
-                            <div class="mt-2">
-                                <li>
-                                    <x-nav-link href="{{ route('archived.employees') }}"
-                                        :active="request()->routeIs('archived.employees')">
-                                        Archived Employees
-                                    </x-nav-link>
-                                </li>
-                            </div>
+                            <li class="mt-2">
+                                <x-nav-link href="{{ route('archived.products') }}" :active="request()->routeIs('archived.products')">
+                                    Archived Products
+                                </x-nav-link>
+                            </li>
+                            <li class="mt-2">
+                                <x-nav-link href="{{ route('archived.employees') }}" :active="request()->routeIs('archived.employees')">
+                                    Archived Employees
+                                </x-nav-link>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -163,18 +150,17 @@
         </ul>
     </div>
 
-    <!-- Footer Section with Logout Form -->
+    <!-- Footer Section -->
     <div class="p-4">
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <x-nav-link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
-                <svg class="shrink-0 w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M17 16l4-4-4-4" />
-                    <path d="M21 12H7" />
-                </svg>
-                Logout
-            </x-nav-link>
-        </form>
+        <button type="submit"
+            class="flex items-center gap-2 text-xs text-gray-900 hover:text-white transition-colors duration-300 hover:bg-red-500 p-2 rounded-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Logout
+        </button>
     </div>
 </div>

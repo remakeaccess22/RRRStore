@@ -11,6 +11,7 @@ class EmployeesController extends Controller
      */
     public function index()
     {
+        // Dri magpass kag data from db gi array lng nako para makita ang sample
         // Employee data
         $data = [
             [
@@ -40,6 +41,18 @@ class EmployeesController extends Controller
 
         $title = 'Employees';
 
-        return view('personnel.employees.index', compact('data', 'columns', 'title'));
+        // Action Buttons
+        $actions = [
+            [
+                'label' => 'Remove',
+                'icon' => '<path d="M4 7h16M10 11v6M14 11v6M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" />',
+                'color' => 'bg-red-600',
+                'hoverColor' => 'bg-red-700',
+            ],
+        ];
+
+        // $filter = ['Status', 'Category'];
+
+        return view('personnel.employees.index', compact('data', 'columns', 'title', 'actions'));
     }
 }

@@ -14,6 +14,7 @@ class Sale extends Model
 
     protected $fillable = [
         'SaleDate',
+        'CustomerID',
         'PaymentType',
         'TotalAmount',
     ];
@@ -24,7 +25,13 @@ class Sale extends Model
         'TotalAmount' => 'float',
     ];
 
-    // Relationships
+    //
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'CustomerID', 'CustomerID');
+    }
+
     public function salesDetails()
     {
         return $this->hasMany(SalesDetail::class, 'SaleID', 'SaleID');
