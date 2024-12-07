@@ -25,7 +25,7 @@ class ReusableTable extends Component
 
     public function render()
     {
-        dd($this->data);
+        $this->data;
         return view('components.reusable-table', [
             'title' => $this->title,
             'columns' => $this->columns,

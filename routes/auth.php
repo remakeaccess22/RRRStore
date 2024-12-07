@@ -2,19 +2,55 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\ApplicantsController;
+use App\Http\Controllers\ArchivedEmployeesController;
+use App\Http\Controllers\ArchivedProductsController;
+use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 
-// Register Routes
-Route::get('/register', [UserController::class, 'create'])->name('register');
-Route::post('/register', [UserController::class, 'store'])->name('register.store');
+// Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::get('/register', [UserController::class, 'create'])->name('register');
+    Route::post('/register', [UserController::class, 'store'])->name('register.store');
+});
 
-// Login Routes
-Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'login'])->middleware('guest');
+// Authenticated Routes
+Route::middleware(['auth'])->group(function () {
+    // Authenticated Routes (Only admins and employees)
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-//Logout Routes
+    // Inventory Routes
+    Route::prefix('inventory')->group(function () {
+        Route::get('/', [InventoryController::class, 'index'])->name('inventory');
+        Route::get('/create', [InventoryController::class, 'create'])->name('inventory.create');
+    });
 
-// Add the 'auth' middleware to the dashboard route
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+    // Sales Routes
+    Route::prefix('sales')->group(function () {
+        Route::get('/', [SalesController::class, 'index'])->name('sales');
+        Route::get('/create', [SalesController::class, 'create'])->name('sales.create');
+    });
+
+    // Personnel Routes
+    Route::prefix('personnel')->group(function () {
+        Route::get('applicants', [ApplicantsController::class, 'index'])->name('personnel.applicants');
+
+        Route::post('/applicants/{id}/approve', [ApplicantsController::class, 'approve'])->name('applicants.approve');
+        Route::delete('/applicants/{id}/remove', [ApplicantsController::class, 'remove'])->name('applicants.remove');        
+        
+
+        Route::get('employees', [EmployeesController::class, 'index'])->name('personnel.employees');
+    });
+
+    // Archived Routes
+    Route::prefix('archived')->group(function () {
+        Route::get('/employees', [ArchivedEmployeesController::class, 'index'])->name('archived.employees');
+        Route::get('/products', [ArchivedProductsController::class, 'index'])->name('archived.products');
+    });
+});

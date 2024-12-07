@@ -152,6 +152,8 @@
 
     <!-- Footer Section -->
     <div class="p-4">
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
         <button type="submit"
             class="flex items-center gap-2 text-xs text-gray-900 hover:text-white transition-colors duration-300 hover:bg-red-500 p-2 rounded-md">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none"
@@ -162,5 +164,7 @@
             </svg>
             Logout
         </button>
-    </div>
+    </form>
+</div>
+
 </div>

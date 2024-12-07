@@ -1,15 +1,18 @@
-<?
+<?php
 
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class AuthenticatedSessionController extends Controller
 {
-    public function destroy()
+    public function destroy(Request $request)
     {
-        Auth::logout(); // Log the user out
-        return redirect()->route('login'); // Redirect to the login page
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

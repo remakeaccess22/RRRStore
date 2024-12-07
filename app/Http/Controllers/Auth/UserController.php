@@ -10,7 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Auth\Events\Registered;
 
-class userController extends Controller
+class UserController extends Controller
 {
     public function create(): View
     {

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 
 class EmployeesController extends Controller
 {
@@ -13,46 +14,33 @@ class EmployeesController extends Controller
     {
         // Dri magpass kag data from db gi array lng nako para makita ang sample
         // Employee data
-        $data = [
-            [
-                'first_name' => 'John',
-                'last_name' => 'Doe',
-                'email' => 'john.doe@site.com',
-                'position' => 'Employee',
-                'hire_date' => '01 Jan, 10:00',
-            ],
-            [
-                'first_name' => 'Jane',
-                'last_name' => 'Smith',
-                'email' => 'jane.smith@site.com',
-                'position' => 'Employee',
-                'hire_date' => '15 Feb, 14:45',
-            ],
-            [
-                'first_name' => 'Michael',
-                'last_name' => 'Johnson',
-                'email' => 'michael.j@site.com',
-                'position' => 'Employee',
-                'hire_date' => '28 Mar, 09:30',
-            ],
-        ];
+        $employees = User::whereIn('RoleID', [1, 2])->get();
 
-        $columns = ['First Name', 'Last Name', 'Email', 'Position', 'Hire Date'];
+        $data = $employees->map(function ($employee) {
+            return [
+                'First Name' => $employee->FirstName,
+                'Last Name' => $employee->LastName,
+                'Email' => $employee->Email,
+                'Role' => $employee->RoleID == 1 ? 'Admin' : 'Employee',
+                'Account Creation Date' => $employee->created_at->format('d M, Y H:i'),
+            ];
+        });
 
-        $title = 'Employees';
+        $columns = ['FirstName', 'LastName', 'Email', 'Position', 'Hire Date'];
+
+        $title = 'Employees & Admins';
 
         // Action Buttons
         $actions = [
             [
                 'label' => 'Remove',
-                'icon' => '<path d="M4 7h16M10 11v6M14 11v6M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" />',
+                'icon' => '<path d="M4 7h16M10 11v6M14 11v6M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7M9 7V5a2 2 0 012-2h2a2 2v2z" />',
                 'color' => 'bg-red-600',
                 'hoverColor' => 'bg-red-700',
             ],
         ];
 
         // $filter = ['Status', 'Category'];
-
         return view('personnel.employees.index', compact('data', 'columns', 'title', 'actions'));
     }
 }
