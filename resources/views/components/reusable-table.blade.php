@@ -1,3 +1,4 @@
+
 <!-- resources/views/components/responsive-table.blade.php -->
 <div class="max-w-[85rem] px-2 sm:px-4 py-4 sm:py-10 lg:px-8 lg:py-14 mx-auto">
     <div class="flex flex-col">
@@ -68,17 +69,27 @@
                         <tbody class="divide-y divide-gray-200">
                             @foreach ($data as $row)
                                 <tr>
-                                    @foreach ($row as $cell)
-                                        <td class="text-md px-4 sm:px-6 py-2 sm:py-3 text-center text-gray-800">
-                                            {{ $cell }}
-                                        </td>
+                                     @foreach ($row as $key => $cell)
+                                        @if ($key !== 'UserID')
+                                <td class="text-md px-4 sm:px-6 py-2 sm:py-3 text-center text-gray-800">
+                                    {{ $cell }}
+                                </td>
+                            @endif
                                     @endforeach
                                     @if (!empty($actions))
                                         <td class="px-4 sm:px-6 py-2 sm:py-3 text-center">
                                             <div class="flex justify-center space-x-2">
+                                               
                                                 @foreach ($actions as $action)
-                                                    <x-action-button :type="'button'" :label="$action['label']"
-                                                        :icon="$action['icon']" :color="$action['color']" :hoverColor="$action['hoverColor']" />
+                                                   
+                                                    <form method="POST" action="{{ route($action['action'], ['id' => $row['UserID']])}}">
+                                                        @csrf
+                                                        @if ($action['method'] !== 'POST')
+                                                            @method($action['method'])
+                                                        @endif
+                                                        <x-action-button :type="$action['type']" :label="$action['label']"
+                                                            :icon="$action['icon']" :color="$action['color']" :hoverColor="$action['hoverColor']" />
+                                                    </form>
                                                 @endforeach
                                             </div>
                                         </td>

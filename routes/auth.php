@@ -41,8 +41,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('personnel')->group(function () {
         Route::get('applicants', [ApplicantsController::class, 'index'])->name('personnel.applicants');
 
-        Route::post('/applicants/{id}/approve', [ApplicantsController::class, 'approve'])->name('applicants.approve');
-        Route::delete('/applicants/{id}/remove', [ApplicantsController::class, 'remove'])->name('applicants.remove');        
+        Route::post('/applicants/approve/{id}', [ApplicantsController::class, 'approve'])->name('applicants.approve');
+        Route::put('/applicants/remove/{id}', [ApplicantsController::class, 'remove'])->name('applicants.remove');        
         
 
         Route::get('employees', [EmployeesController::class, 'index'])->name('personnel.employees');
