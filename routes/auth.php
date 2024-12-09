@@ -29,6 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('inventory')->group(function () {
         Route::get('/', [InventoryController::class, 'index'])->name('inventory');
         Route::get('/create', [InventoryController::class, 'create'])->name('inventory.create');
+
+        Route::get('/edit/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
+        Route::get('/view/{id}', [InventoryController::class, 'view'])->name('inventory.view');
     });
 
     // Sales Routes
@@ -41,11 +44,14 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('personnel')->group(function () {
         Route::get('applicants', [ApplicantsController::class, 'index'])->name('personnel.applicants');
 
-        Route::post('/applicants/{id}/approve', [ApplicantsController::class, 'approve'])->name('applicants.approve');
-        Route::delete('/applicants/{id}/remove', [ApplicantsController::class, 'remove'])->name('applicants.remove');        
+        Route::post('/applicants/approve/{id}', [ApplicantsController::class, 'approve'])->name('applicants.approve');
+        Route::put('/applicants/remove/{id}', [ApplicantsController::class, 'remove'])->name('applicants.remove');        
         
 
         Route::get('employees', [EmployeesController::class, 'index'])->name('personnel.employees');
+
+        Route::post('/employees/promote/{id}', [EmployeesController::class, 'promote'])->name('employees.promote');
+        Route::put('/employees/remove/{id}', [EmployeesController::class, 'remove'])->name('employees.remove');
     });
 
     // Archived Routes
