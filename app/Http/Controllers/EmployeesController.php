@@ -38,14 +38,18 @@ class EmployeesController extends Controller
                 'icon' => '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />',
                 'color' => 'bg-green-700',
                 'hoverColor' => 'bg-green-900',
+                'type' => 'submit',
                 'action' => 'employees.promote',
+                'method' => 'POST',
             ],
             [
                 'label' => 'Remove',
                 'icon' => '<path d="M4 7h16M10 11v6M14 11v6M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7M9 7V5a2 2 0 012-2h2a2 2v2z" />',
                 'color' => 'bg-red-600',
                 'hoverColor' => 'bg-red-700',
+                'type' => 'submit',
                 'action' => 'employees.remove',
+                'method'=> 'PUT',
             ],
         ];
 
@@ -53,4 +57,17 @@ class EmployeesController extends Controller
         return view('personnel.employees.index', compact('data', 'columns', 'title', 'actions'));
     }
     
+    public function promote($id){
+        $employee = User::findOrFail($id);
+        $employee->update(['RoleID' => 1]);
+        
+        return redirect()->back()->with('success','User has been promoted to Admin');
+    }
+
+    public function remove($id){
+        $employee = User::findOrFail($id);
+        $employee->delete();
+        return redirect()->back()->with('success','User has been removed');
+
+    }
 }

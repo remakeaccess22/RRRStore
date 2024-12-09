@@ -46,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
         
 
         Route::get('employees', [EmployeesController::class, 'index'])->name('personnel.employees');
+
+        Route::post('/employees/promote/{id}', [EmployeesController::class, 'promote'])->name('employees.promote');
+        Route::put('/employees/remove/{id}', [EmployeesController::class, 'remove'])->name('employees.remove');
     });
 
     // Archived Routes
