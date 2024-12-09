@@ -41,6 +41,7 @@ class EmployeesController extends Controller
                 'type' => 'submit',
                 'action' => 'employees.promote',
                 'method' => 'POST',
+                'methodByCSRF' => 'POST',
             ],
             [
                 'label' => 'Remove',
@@ -49,7 +50,8 @@ class EmployeesController extends Controller
                 'hoverColor' => 'bg-red-700',
                 'type' => 'submit',
                 'action' => 'employees.remove',
-                'method'=> 'PUT',
+                'method'=> 'POST',
+                'methodByCSRF' => 'PUT',
             ],
         ];
 

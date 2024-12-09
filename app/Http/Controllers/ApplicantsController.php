@@ -32,6 +32,7 @@ class ApplicantsController extends Controller
                 'type' => 'submit',
                 'action' => 'applicants.approve',
                 'method' => 'POST',
+                'methodByCSRF' => 'POST',
             ],
             [
                 'label' => 'Remove',
@@ -40,7 +41,8 @@ class ApplicantsController extends Controller
                 'hoverColor' => 'bg-red-700',
                 'type' => 'submit',
                 'action' => 'applicants.remove',
-                'method' => 'PUT',
+                'method' => 'POST',
+                'methodByCSRF' => 'PUT',
             ],
         ];
 

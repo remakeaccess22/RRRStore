@@ -23,17 +23,6 @@
                             <!-- Search Bar -->
                             <x-search-bar />
 
-                            <!-- Create Button -->
-                            @if ($createRoute)
-                                <a href="{{ route($createRoute) }}"
-                                    class="py-1.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-md border border-transparent bg-green-700 text-white hover:bg-green-900 transition-colors duration-300 focus:outline-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Create
-                                </a>
-                            @endif
                         </div>
                         <!-- Create Button -->
                         @if ($createRoute)
@@ -82,10 +71,12 @@
                                                
                                                 @foreach ($actions as $action)
                                                    
-                                                    <form method="POST" action="{{ route($action['action'], ['id' => $row['UserID']])}}">
-                                                        @csrf
-                                                        @if ($action['method'] !== 'POST')
-                                                            @method($action['method'])
+                                                    <form method="{{$action['method']}}" action="{{ route($action['action'], ['id' => $row['UserID'] ?? $row['ProductID']]) }}">
+                                                        @if ($action['method'] !== 'GET')
+                                                            @csrf
+                                                        @endif
+                                                        @if ($action['methodByCSRF'] !== 'POST')
+                                                            @method($action['methodByCSRF'])
                                                         @endif
                                                         <x-action-button :type="$action['type']" :label="$action['label']"
                                                             :icon="$action['icon']" :color="$action['color']" :hoverColor="$action['hoverColor']" />

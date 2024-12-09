@@ -69,23 +69,42 @@ class InventoryController extends Controller
                 'icon' => '<path d="M12 4v16m8-8H4" />',
                 'color' => 'bg-green-700',
                 'hoverColor' => 'bg-green-900',
+                'type' => 'submit',
+                'action' => 'inventory.view',
+                'method' => 'GET',
+                'methodByCSRF' => '',
             ],
             [
                 'label' => 'Edit',
                 'icon' => '<path d="M12 20h9"></path><path d="M16.5 3.5l4 4"></path><path d="M14 6l6 6"></path>',
                 'color' => 'bg-yellow-500',
                 'hoverColor' => 'bg-yellow-600',
+                'type' => 'submit',
+                'action' => 'inventory.edit',
+                'method' => 'GET',
+                'methodByCSRF' => '',
             ],
             [
                 'label' => 'Remove',
                 'icon' => '<path d="M4 7h16M10 11v6M14 11v6M5 7v12a2 2 0 002 2h10a2 2 0 002-2V7M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2" />',
                 'color' => 'bg-red-600',
                 'hoverColor' => 'bg-red-700',
+                'type' => 'submit',
+                'action' => 'inventory.edit',
+                'method' => 'POST',
+                'methodByCSRF' => 'PUT',
             ],
         ];
 
         $createRoute = 'inventory.create';
 
         return view('inventory.index', compact('data', 'columns', 'title', 'actions', 'createRoute'));
+    }
+
+    public function edit($id){
+        return view('inventory.edit', compact('id'));
+    }
+    public function view($id){
+        return view('inventory.view', compact('id'));
     }
 }
