@@ -101,6 +101,11 @@ class InventoryController extends Controller
         return view('inventory.index', compact('data', 'columns', 'title', 'actions', 'createRoute'));
     }
 
+    public function create() {
+        return view('inventory.create');
+
+    }
+
     public function edit($id){
         return view('inventory.edit', compact('id'));
     }
