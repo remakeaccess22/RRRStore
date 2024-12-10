@@ -9,11 +9,12 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id('CategoryID');
-            $table->string('CategoryName')->unique();
+            $table->id();  // This ensures the id column is created as a primary key
+            $table->string('CategoryName');
             $table->timestamps();
         });
     }
+
 
     public function down()
     {

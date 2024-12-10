@@ -11,12 +11,26 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'products';
-    protected $primaryKey = 'ProductID';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
+        'name',
+        'category',
+        'subcategory',
+        'description',
+        'quantity',
+        'supplier',
+        'brand',
+        'unit_price',
+        'based_price',
+
         'ProductName',
         'CategoryID',
         'SupplierID',
+        'SubcategoryID',
+        'BrandID',
+        'Description',
+        'BasePrice',
         'QuantityInStock',
         'RestockThreshold',
         'UnitPrice',
